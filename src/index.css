@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
-body {
-  margin: 0;
+/* Date and time picker color scheme */
+input[type="date"],
+input[type="time"] {
+  color-scheme: dark;
 }

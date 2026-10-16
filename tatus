@@ -1,0 +1,24 @@
+warning: in the working copy of 'package-lock.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'package.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/App.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/index.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main.jsx', LF will be replaced by CRLF the next time Git touches it
+ package-lock.json                  |  30 [32m++++++[m
+ package.json                       |   2 [32m+[m
+ src/App.jsx                        | 202 [32m++++++++++++++++++[m[31m-------------------[m
+ src/Dashboard.jsx                  |   0
+ src/components/ApplicationCard.jsx |  26 [31m-----[m
+ src/components/ApplicationForm.jsx | 141 [31m--------------------------[m
+ src/components/ApplicationList.jsx | 138 [31m-------------------------[m
+ src/components/Button.jsx          |   7 [31m--[m
+ src/components/Card.jsx            |   9 [31m--[m
+ src/components/Footer.jsx          |   8 [31m--[m
+ src/components/Header.jsx          |  11 [31m--[m
+ src/components/Modal.jsx           |  38 [31m-------[m
+ src/components/Navbar.jsx          | 114 [32m++++++++++++++++++[m[31m---[m
+ src/components/Sidebar.jsx         |  73 [32m+++++++++++[m[31m---[m
+ src/components/StatsCard.jsx       |  13 [31m---[m
+ src/components/test.js             |  16 [32m++[m[31m-[m
+ src/index.css                      |   6 [32m+[m[31m-[m
+ src/main.jsx                       |   4 [32m+[m[31m-[m
+ 18 files changed, 299 insertions(+), 539 deletions(-)

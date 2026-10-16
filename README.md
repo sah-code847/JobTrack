@@ -1,40 +1,54 @@
-# JobTrack
+# Hospital Dashboard
 
-A responsive Job Application Tracker built with React and Tailwind CSS.
+A responsive Hospital Management Dashboard built with React and Tailwind CSS.
 
 ## Features
 
-- Add job applications
-- Edit job applications
-- Delete job applications
-- Search applications
-- Filter applications by status
-- Pin and unpin applications
-- Clear all applications with confirmation
-- Application statistics
-- LocalStorage persistence
-- Responsive design for mobile and desktop
+- Dashboard overview with statistics
+- Patients management
+- Doctors management
+- Appointments management
+- Search functionality
+- Dark and light mode
+- Profile dropdown
+- Appointment charts
+- Recent appointments
+- Responsive layout
 
 ## Tech Stack
 
 - React
 - JavaScript
 - Tailwind CSS
-- LocalStorage
 - Vite
-
-## Application Status
-
-JobTrack supports:
-
-- Applied
-- Interview
-- Rejected
-- Selected
+- Chart.js (if used in the project)
 
 ## Getting Started
 
-Clone the repository:
+### 1. Clone the repository
 
 ```bash
-git clone https://github.com/sah-code847/JobTrack.git
+git clone YOUR_REPOSITORY_URL
+```
+
+### 2. Navigate into the project
+
+```bash
+cd react-app
+```
+
+### 3. Install dependencies
+
+```bash
+npm install
+```
+
+### 4. Start the development server
+
+```bash
+npm run dev
+```
+
+## Project Status
+
+A portfolio project focused on practicing React components, state management, dashboard UI, and responsive design.

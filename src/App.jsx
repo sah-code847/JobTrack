@@ -1,116 +1,106 @@
-import "./App.css";
-import { useState, useEffect } from "react";
-import ApplicationList from "./components/ApplicationList";
-import ApplicationForm from "./components/ApplicationForm";
-import StatsCard from "./components/StatsCard";
+import { useState } from "react";
+
+import Patients from "./pages/Patients";
+import RecentAppointments from "./components/RecentAppointments";
+import AppointmentsChart from "./components/AppointmentsChart";
+import StatCard from "./components/StatCard";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
+import Doctors from "./pages/Doctors";
+import Appointments from "./pages/Appointments";
 
+const App = () => {
+  const [openSideBar, setOpenSideBar] = useState(false);
 
-function App() {
-  const [applications, setApplications] = useState(() => {
-  const savedApplications = localStorage.getItem("applications");
+  const [darkMode,setDarkMode] = useState(false);
+  const [activePage,setActivePage] = useState("Dashboard");
+  const [globalSearch,setGlobalSearch] = useState("");
 
-  return savedApplications ? JSON.parse(savedApplications) : [];
-});
-
-
-useEffect(() => {
-  localStorage.setItem("applications", JSON.stringify(applications));
-}, [applications]);
-
-  const [editId,setEditId]=useState(null);
-  const [editApplication,setEditApplication]=useState(null);
-
-  const cancelEdit = () => {
-  setEditId(null);
-  setEditApplication(null);
-};
-
-  const deleteApplication=(id)=>{
-    const updateApplication=applications.filter((application)=>application.id !==id);
-    setApplications(updateApplication);
-  }
-
-  const startEdit=(id)=>{
-    const updateApplication=applications.find((application)=>application.id===id);
-    setEditId(id);
-    setEditApplication(updateApplication);
-
-  }
-
- 
-
-  const appliedApplication=applications.filter((application)=>application.status==="applied");
-
-  const totalApplied=appliedApplication.length;
-
- const interviewerApplication = applications.filter(
-  (application) => application.status === "interview"
-);
-
-const totalInterviewer = interviewerApplication.length;
-
-  const rejectedApplication=applications.filter((application)=>application.status==="rejected");
-
-  const totalRejected=rejectedApplication.length;
-
-  const selectedApplication=applications.filter((application)=>application.status==="selected");
-
-  const totalSelected=selectedApplication.length;
-
-  
 
   return (
-    <>
-    <Navbar/>
+    <div className={`min-h-screen transition-colors duration-300 ${
+      darkMode ? "bg-slate-950 text-white" : "bg-gray-100 text-gray-900"
+    }`}>
 
-<div className="flex">
-    <Sidebar/>
 
-<main className="flex-1 min-w-0 p-4 md:p-6 bg-slate-50">
-  
+      <Navbar setOpenSideBar={setOpenSideBar} 
+      darkMode={darkMode}
+      setDarkMode={setDarkMode}
+      search={globalSearch}
+      setSearch={setGlobalSearch}
+      onSearch={()=>setActivePage("Patients")}
+      />
 
-      <ApplicationList
-       applications={applications} 
-      deleteApplication={deleteApplication} 
-      startEdit={startEdit}
-      setApplications={setApplications}
-     />
+      <div className="flex min-w-0-full">
+        <Sidebar
+            openSideBar={openSideBar}
+            setOpenSideBar={setOpenSideBar}
+            darkMode={darkMode}
+            activePage={activePage}
+            setActivePage={setActivePage}
+          />
 
-      <ApplicationForm 
-      applications={applications}
-      setApplications={setApplications} 
-       editId={editId} 
-       editApplication={editApplication}
-       setEditId={setEditId}
-       cancelEdit={cancelEdit}
-       />
-<div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-6">
-       <StatsCard
-  title="Applied"
-  count={totalApplied}
-/>
+        <main className="flex-1 min-w-0 w-0 p-3 sm:p-6">
+          {/* <h1>Welcome to Hospital Dashboard</h1> */}
 
-<StatsCard
-  title="Interview"
-  count={totalInterviewer}
-/>
+          {
+            activePage === "Patients" && (
+              <Patients darkMode={darkMode} 
+              globalSearch={globalSearch}
+              />
+            )
+          }
 
-<StatsCard
-  title="Rejected"
-  count={totalRejected}
-/>
+        {activePage === "Doctors" && (
+       <Doctors darkMode={darkMode} />
+       )}
 
-<StatsCard
-  title="Selected"
-  count={totalSelected}
-/>
-</div>
-</main>
-        </div>
-    </>
+          {activePage === "Appointments" && (
+        <Appointments darkMode={darkMode} />
+     )}
+
+    
+{activePage === "Dashboard" && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            <StatCard
+              title="Total Patients"
+              value="1248"
+              change="+12% this month"
+              darkMode={darkMode}
+            />
+
+            <StatCard
+              title="Total Doctors"
+              value="86"
+              change="+5% this month"
+              darkMode={darkMode}/>
+
+            <StatCard
+              title="Appointments"
+              value="324"
+              change="+8% this month"
+              darkMode={darkMode}
+            />
+
+            <StatCard
+              title="Available Beds"
+              value="42"
+              change="6 bed occupied today"
+              darkMode={darkMode}
+            />
+          </div>
+         )}
+        {activePage === "Dashboard" && (
+      <div className="mt-6 grid grid-cols-1 xl:grid-cols-2 gap-6">
+      <AppointmentsChart darkMode={darkMode} />
+      <RecentAppointments darkMode={darkMode} />
+     </div>
+        )}
+
+        </main>
+      </div>
+    </div>
   );
-}
+};
 
 export default App;
